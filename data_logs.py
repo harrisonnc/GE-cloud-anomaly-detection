@@ -24,7 +24,6 @@ def retrieve_column_headings(conf_file):
     column_headings={}
     for key in column_keys:
         for line in conf_file:
-            print(key)
             if re.match(key, line):
                 column_headings[key]=line.split('\'', 1)[1].split('\'',1)[0]
                 break
@@ -32,7 +31,16 @@ def retrieve_column_headings(conf_file):
         if re.match('custom[01-99]', line):
             column_headings[line.split('=', 1)[0]]=line.split('\'', 1)[1].split('\'',1)[0]
     return column_headings
-#def format_data():
+def format_data(log_data, column_headings):
+    print(log_data.columns)
+    print(column_headings)
+    formatted_log=pd.DataFrame()
+    for key in column_headings:
+        if log_data[column_headings[key]].any():
+            formatted_log.loc[:,column_headings[key]]=log_data[column_headings[key]]
+        else:
+            print(column_headings[key])
+    return formatted_log
 #def analyze_data():
 
 def main():
@@ -42,8 +50,9 @@ def main():
     master_log=retrieve_data(log_location,file_type)
     print(len(master_log))
     column_headings=retrieve_column_headings(conf_file)
-    print(column_headings)
-    print(column_headings.__len__())
+    print(column_headings.values())
+    formatted_log=format_data(master_log,column_headings)
+    print(formatted_log.head())
 #    print(master_log.head())
 if __name__ == "__main__":
     main()
