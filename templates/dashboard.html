@@ -1,6 +1,10 @@
 <!doctype html>
 <title>Anomaly Dashboard</title>
-<h1>Anomaly Dashboard</h1>
+<h1 align="center">Anomaly Dashboard</h1>
+
 {% block content %}
-  {{ name | safe }}
+    <h4 align="center">Sample</h4>
+    {{ sample | safe }}
+    <h4>Top 15 Login Attempts</h4>
+    {{ logins | safe }}
 {% endblock %}
