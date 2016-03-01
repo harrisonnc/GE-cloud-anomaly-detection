@@ -2,9 +2,14 @@
 <title>Anomaly Dashboard</title>
 <h1 align="center">Anomaly Dashboard</h1>
 
+<p></p>
+
 {% block content %}
+    <p align="right">Search:<input type="text" value="Search" id="search_value"><input type="button" value="Go" formaction="/user-111" method="post"></p>
+    <hr align="center" ></hr>
     <h4 align="center">Sample</h4>
     {{ sample | safe }}
     <h4>Top 15 Login Attempts</h4>
     {{ logins | safe }}
 {% endblock %}
+
