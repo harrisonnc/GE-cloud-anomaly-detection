@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+<title>About</title>
+<style>
+    body{background-color:black;color: gold;text-align: center}
+    h1 {
+    text-align: center;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li style="float:right"><a class="active" href="/about">About</a></li>
+</ul>
+
+
+
+
+
+<h1>Developers</h1>
+<p>
+Justin Murphy<br>
+Nicholas Harrison<br>
+John Taylor<br>
+</p>
+
+<h1>About Project</h1>
+<p>This is our project for the VCU Capstone. We have created a security engine using Python and its data science packages, Anacondas, Numpy and Pandas in conjunction with Flask for hosting it via a web server. The user will enter a log file and the program will data mine it looking for various pieces
+of information in order to find anomalies that could be potential threats to the network the engine is protecting.</p>
+
+</body>
+</html>

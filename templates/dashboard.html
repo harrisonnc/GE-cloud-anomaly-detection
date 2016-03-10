@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+        <title>Anomaly Dashboard</title>
+
+        <style>
+
+        body{background-color:black;color: gold;}
+        </style>
+    </head>
+
+    <body>
+
+
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/contact">Contact</a></li>
+           <li style="float:right"><a href="/about">About</a></li>
+        </ul>
+
+
+        <h1 align="center">Anomaly Dashboard</h1>
+        {% block content %}
+
+            <hr align="center" ></hr>
+            <h4 align="center">Sample</h4>
+            {{ sample | safe }}
+
+            <h4 >Top 15 Login Attempts</h4>
+            {{ logins | safe }}
+
+        {% endblock %}
+
+        <br>
+        <br>
+
+
+
+        <img src="{{ url_for('static', filename='img/successGraph.png') }}" width="600" height="400"></img>
+
+
+        <img src="{{ url_for('static', filename='img/failGraph.png') }}"width="600" height="400"></img>
+
+
+        <img src="{{ url_for('static', filename='img/totalGraph.png') }}"width="600" height="400"></img>
+
+
+
+    </body>
+</html>
