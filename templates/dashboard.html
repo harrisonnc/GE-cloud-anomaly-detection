@@ -10,7 +10,7 @@
         </style>
     </head>
 
-    <body>
+    <ul>
 
 
         <ul>
@@ -30,6 +30,12 @@
 
             <h4 >Top 15 Login Attempts</h4>
             {{ logins | safe }}
+
+            <h4 >Top 15 Successful Login Attempts</h4>
+            {{ successful | safe }}
+
+            <h4 >Top 15 failed Login Attempts</h4>
+            {{ failed | safe }}
 
         {% endblock %}
 
