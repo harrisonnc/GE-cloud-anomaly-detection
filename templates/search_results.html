@@ -1,11 +1,29 @@
 <!DOCTYPE html>
+<head>
  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+
+    <title>Search Results</title>
+
 <style>
- body{background-color:black;color: gold;}
+ body{background-color:black;color: #00ff00;}
 </style>
-<title>Search Results</title>
+
+
+</head>
+<body>
+
+<ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li style="float:right"><a class="active" href="/about">About</a></li>
+</ul>
+
 <h1 align="center">Search Results</h1>
+
+
 
 {% block content %}
     {{ search_results | safe }}
 {% endblock %}
+</body>

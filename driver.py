@@ -43,4 +43,3 @@ if __name__ == '__main__':
     app.debug=True
     graphics.main(graphics)
     app.run()
-

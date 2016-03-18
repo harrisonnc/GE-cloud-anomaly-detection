@@ -9,13 +9,32 @@ class graphics(data_logs):
         df = data_logs()
         times = df.formatted_log['startTime'].tolist()
         times.sort()
-        logins = []
+        counter=1
+        clumpcount=0
+        time=times[0]
+        clumps=[]
+        clumptime=[]
+        clumps.append(0)
+        clumptime.append(time)
 
         for count in range(0, len(df.formatted_log)):
-            logins += [count]
+            if times[count]-time>=1200000:
+                time=times[count]
+                clumpcount=count-clumpcount
+                clumptime+=[time]
+                clumps+=[clumpcount]
+                counter=counter+1
+            elif count==len(df.formatted_log)-1:
+                time=times[count]
+                clumpcount=count-clumpcount
+                clumptime+=[time]
+                clumps+=[clumpcount]
+                counter=counter+1
+            else:
+                pass
 
-        plt.plot(times, logins)
-        plt.axis([times[0], times[len(df.formatted_log) - 1], 0, logins[len(logins) - 1]])
+        plt.plot(clumptime, clumps)
+        plt.axis('tight')
         plt.title('Total Logins over Time')
         plt.ylabel('login attempts')
         plt.xlabel('time (epoch)')
@@ -44,9 +63,9 @@ class graphics(data_logs):
                 failcount += 1
                 failtimes += [times[count1]]
 
+        plt.clf()
         plt.plot(failtimes, fails)
-        plt.axis([failtimes[0], failtimes[len(failtimes) - 1], 0, len(fails)])
-        # plt.axis([times[0],times[len(df.formatted_log)-1],0,logins[len(logins)-1]])
+        plt.axis('tight')
         plt.title('Failed Logins over Time')
         plt.ylabel('failed attempts')
         plt.xlabel('time (epoch)')
@@ -64,17 +83,32 @@ class graphics(data_logs):
         successCount = 1
         passes = []
         passtimes = []
+        passcount=0
+        time=times[0]
+        passes.append(0)
+        passtimes.append(time)
 
-        for count2 in range(0, len(df.formatted_log)):
-            if eventList[count2] == failure_value[0]:
+        for count in range(0, len(df.formatted_log)):
+            if eventList[count] == failure_value[0]:
                 pass
             else:
-                passes += [successCount]
-                successCount += 1
-                passtimes += [times[count2]]
+                if times[count]-time>=1200000:
+                    time=times[count]
+                    passcount=count-passcount
+                    passtimes+=[time]
+                    passes+=[passcount]
+                    successCount=successCount+1
+                elif count==len(df.formatted_log)-1:
+                    time=times[count]
+                    passcount=count-passcount
+                    passtimes+=[time]
+                    passes+=[passcount]
+                    successCount=successCount+1
+                else:
+                    pass
 
         plt.plot(passtimes, passes)
-        plt.axis([passtimes[0], passtimes[len(passtimes) - 1], 0, successCount])
+        plt.axis('tight')
         # plt.axis([times[0],times[len(df.formatted_log)-1],0,logins[len(logins)-1]])
         plt.title('Successful Logins over Time')
         plt.ylabel('successful attempts')

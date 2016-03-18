@@ -1,16 +1,39 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+
         <title>Anomaly Dashboard</title>
-
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
         <style>
+        body{background-color:black;color: #00ff00;}
+          div {
+            border: 3px solid #00ff00
+            }
+        .clearfix {
+    overflow: auto;
+}
 
-        body{background-color:black;color: gold;}
+            attempts{
+            float: left;
+            margin-right: 30px;
+            }
+            successes{
+            float: left;
+            margin-right: 30px;
+            }
+            fails{
+            float: left;
+            margin-right:900px;
+            }
+
+
+
+
+
         </style>
-    </head>
 
-    <ul>
+    </head>
+<body>
 
 
         <ul>
@@ -18,25 +41,37 @@
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
            <li style="float:right"><a href="/about">About</a></li>
-        </ul>
+    </ul>
 
 
         <h1 align="center">Anomaly Dashboard</h1>
         {% block content %}
 
+        <div class="clearfix"></div>
             <hr align="center" ></hr>
+
+
+
             <h4 align="center">Sample</h4>
             {{ sample | safe }}
 
+            <attempts>
             <h4 >Top 15 Login Attempts</h4>
             {{ logins | safe }}
+            </attempts>
 
+            <successes>
             <h4 >Top 15 Successful Login Attempts</h4>
             {{ successful | safe }}
+            </successes>
 
+
+            <fails>
             <h4 >Top 15 failed Login Attempts</h4>
             {{ failed | safe }}
+            </fails>
 
+            </div>
         {% endblock %}
 
         <br>
