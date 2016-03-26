@@ -12,53 +12,83 @@
         .clearfix {
     overflow: auto;
 }
-
             attempts{
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-bottom: 25px;
+            margin-left: 25px;
             float: left;
             margin-right: 30px;
+            border-style: outset;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
             }
             successes{
             float: left;
             margin-right: 30px;
+            border-style: outset;
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+               padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
             }
+
             fails{
             float: left;
             margin-right:900px;
+            border-style: outset;
+            margin-top: 25px;
+            margin-right: 600px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+               padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
             }
 
-
-
-
-
+            graphs{
+            display: inline;
+            }
         </style>
 
     </head>
 <body>
-
-
-        <ul>
+        <img src="{{ url_for('static', filename='img/capstone header.png') }}" width="1900" height="100"></img>
+         <ul>
           <li><a class="active" href="/">Home</a></li>
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
-           <li style="float:right"><a href="/about">About</a></li>
+           <li><a href="/about">About</a></li>
+           <li style="float:right"><a href="/search">Search</a></li>
     </ul>
 
 
         <h1 align="center">Anomaly Dashboard</h1>
         {% block content %}
 
+
+
+
         <div class="clearfix"></div>
             <hr align="center" ></hr>
 
-
-
             <h4 align="center">Sample</h4>
             {{ sample | safe }}
+
 
             <attempts>
             <h4 >Top 15 Login Attempts</h4>
             {{ logins | safe }}
             </attempts>
+
+
 
             <successes>
             <h4 >Top 15 Successful Login Attempts</h4>
@@ -71,7 +101,11 @@
             {{ failed | safe }}
             </fails>
 
+
             </div>
+
+
+
         {% endblock %}
 
         <br>
@@ -79,15 +113,16 @@
 
 
 
-        <img src="{{ url_for('static', filename='img/successGraph.png') }}" width="600" height="400"></img>
+        <img src="{{ url_for('static', filename='img/successGraph.png') }}" width="600" height="400" ></img>
 
 
+        <graphs>
         <img src="{{ url_for('static', filename='img/failGraph.png') }}"width="600" height="400"></img>
-
 
         <img src="{{ url_for('static', filename='img/totalGraph.png') }}"width="600" height="400"></img>
 
-
+        <img src="{{ url_for('static', filename='img/vcu header.png') }}" width="1900" height="100"></img>
+        </graphs>
 
     </body>
 </html>
