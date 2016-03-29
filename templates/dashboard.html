@@ -7,7 +7,7 @@
         <style>
         body{background-color:black;color: #00ff00;}
           div {
-            border: 3px solid #00ff00
+            border: 3px solid #00ff00;
             }
         .clearfix {
     overflow: auto;
@@ -24,6 +24,7 @@
             padding-bottom:10px;
             padding-left:10px;
             padding-right:10px;
+            background: gray;
             }
             successes{
             float: left;
@@ -37,6 +38,7 @@
             padding-bottom:10px;
             padding-left:10px;
             padding-right:10px;
+            background: gray;
             }
 
             fails{
@@ -47,10 +49,11 @@
             margin-right: 600px;
             margin-bottom: 25px;
             margin-left: 25px;
-               padding-top:10px;
+            padding-top:10px;
             padding-bottom:10px;
             padding-left:10px;
             padding-right:10px;
+            background: gray;
             }
 
             graphs{
@@ -63,7 +66,7 @@
         <img src="{{ url_for('static', filename='img/capstone header.png') }}" width="1900" height="100"></img>
          <ul>
           <li><a class="active" href="/">Home</a></li>
-          <li><a href="/news">News</a></li>
+          <li><a href="/sample">Sample</a></li>
           <li><a href="/contact">Contact</a></li>
            <li><a href="/about">About</a></li>
            <li style="float:right"><a href="/search">Search</a></li>
@@ -79,8 +82,8 @@
         <div class="clearfix"></div>
             <hr align="center" ></hr>
 
-            <h4 align="center">Sample</h4>
-            {{ sample | safe }}
+            <!--<h4 align="center">Sample</h4>>
+            {{ sample | safe }}-->
 
 
             <attempts>

@@ -18,9 +18,9 @@ def dashboard():
     topFailedLogins=logFile.log_links(logFile.top_failed_logins(15))
     return render_template('dashboard.html', logins=topLogins.to_html(escape=False),
                            successful=topSuccessfulLogins.to_html(escape=False),
-                           failed=topFailedLogins.to_html(escape=False),
-                           sample=logFile.formatted_log.head().to_html())
-    #return str(master_log.head())
+                           failed=topFailedLogins.to_html(escape=False))
+                           #sample=logFile.formatted_log.head().to_html())
+
 
 @app.route('/<username>')
 def individual_log(username):
@@ -30,12 +30,18 @@ def individual_log(username):
 
 @app.route('/contact')
 def contact():
-        return render_template('contact.html')
+    return render_template('contact.html')
 
 
 @app.route('/about')
 def about():
-        return render_template('about.html')
+    return render_template('about.html')
+
+@app.route('/sample')
+def sample():
+    logFile=log_analysis()
+    return render_template('sample.html' ,sample=logFile.formatted_log.head(100).to_html())
+
 
 
 
