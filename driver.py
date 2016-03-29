@@ -48,4 +48,4 @@ def sample():
 if __name__ == '__main__':
     app.debug=True
     graphics.main(graphics)
-    app.run()
+    app.run(host='0.0.0.0')

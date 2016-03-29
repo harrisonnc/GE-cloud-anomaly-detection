@@ -81,6 +81,9 @@ class log_analysis(data_logs):
 
         account_indexed_log=self.formatted_log.set_index(self.column_headings['login_account'])
         failure_values=['A Kerberos authentication ticket (TGT) was rejected','Web Service Login Failed']
+        failed_logins=self.formatted_log.set_index(['eventName']).loc[failure_values].groupby('username').groups.keys()
+        print(failed_logins)
+        print(len(failed_logins))
         for key in self.formatted_log.groupby(self.column_headings['login_account']).groups.keys():
             failed_count=0
             current_account=account_indexed_log.loc[[key]][['eventName','startTime']].sort_values('startTime')
@@ -99,25 +102,25 @@ class log_analysis(data_logs):
                     if failed_count >= locked_account:
                         self.failed_account_anomalies.append(key)
                         break
-        #return self.failed_account_anomalies
+        return self.failed_account_anomalies
     def location_login_anomaly(self,interval_sec=900):
         pass
 
 def main():
 
     logFile=log_analysis()
-    topLogins=logFile.top_logins()
+#    topLogins=logFile.top_logins()
     #loginAnomaly=logFile.failed_login_anomaly()
     #print(loginAnomaly)
-    print(logFile.top_successful_logins(15))
-    print(logFile.top_failed_logins(15))
-    print(logFile.white_listed)
-    print(len(logFile.white_listed))
-    print(logFile.white_listed[0])
-    print(logFile.black_listed)
-    print(len(logFile.black_listed))
-    print(logFile.black_listed[0])
-#    logFile.failed_login_anomaly()
+#    print(logFile.top_successful_logins(15))
+#    print(logFile.top_failed_logins(15))
+#    print(logFile.white_listed)
+#    print(len(logFile.white_listed))
+#    print(logFile.white_listed[0])
+#    print(logFile.black_listed)
+#    print(len(logFile.black_listed))
+#    print(logFile.black_listed[0])
+    print(logFile.failed_login_anomaly())
 #    print(master_log.head())
 #    print(logFile.failed_account_anomalies)
 #    print(logFile.formatted_log[logFile.formatted_log.username == 'user-5941']['eventName'])
