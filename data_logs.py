@@ -77,12 +77,16 @@ class data_logs(object):
                                                                                                       'deviceName',
                                                                                                       'eventName']]
     def log_links(self,log_to_link):
+        print(log_to_link)
         linker_log=log_to_link.reset_index()
         linker=linker_log['username']
+        final_linker=[]
+        print(linker)
         for n,i in enumerate(linker):
-            linker[n] = ' <a href=\"'+linker[n]+'\">'+linker[n]+'</a>'
+            final_linker.append(' <a href=\"'+linker[n]+'\">'+linker[n]+'</a>')
+        print(final_linker)
         #print(str(len(linker))+' : '+str(len(linker_log.groupby('username').groups.keys())))  #for testing purposes only
-        linker_log['username']=linker_log['username'].replace(to_replace=[linker_log.groupby('username').groups.keys()],value=[linker])
+        linker_log['username']=linker_log['username'].replace(to_replace=[linker_log.groupby('username').groups.keys()],value=[final_linker])
         return linker_log.set_index(['username'])
 
 

@@ -1,15 +1,128 @@
 <!doctype html>
-<title>Anomaly Dashboard</title>
-<h1 align="center">Anomaly Dashboard</h1>
+<html>
+    <head>
 
-<p></p>
+        <title>Anomaly Dashboard</title>
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+        <style>
+        body{background-color:black;color: #00ff00;}
+          div {
+            border: 3px solid #00ff00;
+            }
+        .clearfix {
+    overflow: auto;
+}
+            attempts{
+            color: #000000;
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+            float: left;
+            margin-right: 30px;
+            border-style: outset;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
+            background: #b2b2b2;
+            align
+            }
+            successes{
+            float: left;
+            margin-right: 30px;
+            border-style: outset;
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
+            color: #000000;
+            background: #b2b2b2;
+            }
 
-{% block content %}
-    <p align="right">Search:<input type="text" value="Search" id="search_value"><input type="button" value="Go" formaction="/user-111" method="post"></p>
-    <hr align="center" ></hr>
-    <h4 align="center">Sample</h4>
-    {{ sample | safe }}
-    <h4>Top 15 Login Attempts</h4>
-    {{ logins | safe }}
-{% endblock %}
+            fails{
+            float: left;
+            margin-right:900px;
+            border-style: outset;
+            margin-top: 25px;
+            margin-right: 600px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
+            color: #000000;
+            background: #b2b2b2;
+            }
 
+            graphs{
+            display: inline;
+            }
+        </style>
+
+    </head>
+<body>
+        <img src="{{ url_for('static', filename='img/capstone header.png') }}" width="1887" height="150"></img>
+         <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/sample">Sample</a></li>
+          <li><a href="/contact">Contact</a></li>
+           <li><a href="/about">About</a></li>
+           <li style="float:right"><a href="/search">Search</a></li>
+    </ul>
+
+
+        <h1 align="center">Anomaly Dashboard</h1>
+        {% block content %}
+
+
+
+
+        <div class="clearfix"></div>
+            <hr align="center" ></hr>
+
+            <!--<h4 align="center">Sample</h4>>
+            {{ sample | safe }}-->
+
+
+            <attempts>
+            <h4>Top 15 Login Attempts</h4>
+            {{ logins | safe }}
+            </attempts>
+
+
+
+            <successes>
+            <h4 >Top 15 Successful Login Attempts</h4>
+            {{ successful | safe }}
+            </successes>
+
+
+            <fails>
+            <h4 >Top 15 failed Login Attempts</h4>
+            {{ failed | safe }}
+            </fails>
+
+
+            </div>
+
+
+
+        {% endblock %}
+
+        <br>
+        <br>
+
+
+        <graphs>
+        <img src="{{ url_for('static', filename='img/combinedGraph.png') }}"width="600" height="400"></img>
+
+        </graphs>
+    <img src="{{ url_for('static', filename='img/vcu header.png') }}" width="1887" height="100"></img>
+    </body>
+</html>

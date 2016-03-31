@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+<title>About</title>
+<style>
+    body{background-color:black;color: #00ff00;text-align: center}
+
+    h1 {
+    text-align: center;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sample">Sample</a></li>
+          <li><a href="/contact">Contact</a></li>
+           <li><a class="active"  href="/about">About</a></li>
+           <li style="float:right"><a href="/search">Search</a></li>
+</ul>
+
+
+
+
+
+<h1>Developers</h1>
+<p>
+Justin Murphy<br>
+Nicholas Harrison<br>
+John Taylor<br>
+</p>
+
+<h1>About Project</h1>
+<p>This is our project for the VCU Capstone. We have created a security engine using Python and its data science packages, Anacondas, Numpy and Pandas in conjunction with Flask for hosting it via a web server. The user will enter a log file and the program will data mine it looking for various pieces
+of information in order to find anomalies that could be potential threats to the network the engine is protecting.
+<br>
+<br>
+Our project searches though authentication log and reports on typical signs of possible intrusion as well as supplies whatever CIRT team with analytics on the data collected. Our project deliverables include means of analysis on different anomalies including successive repeated failures, location
+based login anomalies, and excessive fails from one location. Other deliverables included output to a local host web interface for easy presentation of anomalies and statistics, and developing means to easily search logs based on username for in depth study by the security team.
+</p>
+
+</body>
+</html>
