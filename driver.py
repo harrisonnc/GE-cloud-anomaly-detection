@@ -13,12 +13,13 @@ def dashboard():
 #    formatted_log=data_logs.format_data(master_log,column_headings)
 
     logFile=log_analysis()
+    #topLogins=logFile.log_links(logFile.top_logins(15))
     topLogins=logFile.log_links(logFile.top_logins(15))
     topSuccessfulLogins=logFile.log_links(logFile.top_successful_logins(15))
     topFailedLogins=logFile.log_links(logFile.top_failed_logins(15))
     return render_template('dashboard.html', logins=topLogins.to_html(escape=False),
-                           successful=topSuccessfulLogins.to_html(escape=False),
-                           failed=topFailedLogins.to_html(escape=False))
+                           successful=topSuccessfulLogins.to_html(escape=False,index=False),
+                           failed=topFailedLogins.to_html(escape=False,index=False))
                            #sample=logFile.formatted_log.head().to_html())
 
 

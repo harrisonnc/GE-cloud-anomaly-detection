@@ -62,7 +62,7 @@ class log_analysis(data_logs):
                 self.black_listed.append(new_key)
             else:
                 print('No list to append.')
-            print(new_key)
+            #print(new_key)
 
     def location_anomalies(self):
         pass
@@ -84,24 +84,25 @@ class log_analysis(data_logs):
         failed_logins=self.formatted_log.set_index(['eventName']).loc[failure_values].groupby('username').groups.keys()
         print(failed_logins)
         print(len(failed_logins))
-        for key in self.formatted_log.groupby(self.column_headings['login_account']).groups.keys():
-            failed_count=0
-            current_account=account_indexed_log.loc[[key]][['eventName','startTime']].sort_values('startTime')
-            #print(current_account)
-            if current_account.isin(failure_values)['eventName'].any():
-                failure_count=current_account.isin(failure_values).groupby('eventName').size()[1]
-            else:
-                failure_count=0
-            if failure_count >= locked_account:
-                for failed in current_account['eventName'].isin(failure_values):
-                    #print(failed)
-                    if failed:
-                        failed_count += 1
-                    else:
-                        failed_count = 0
-                    if failed_count >= locked_account:
-                        self.failed_account_anomalies.append(key)
-                        break
+#        for key in self.formatted_log.groupby(self.column_headings['login_account']).groups.keys():
+#            failed_count=0
+#            current_account=account_indexed_log.loc[[key]][['eventName','startTime']].sort_values('startTime')
+#            #print(current_account)
+#            if current_account.isin(failure_values)['eventName'].any():
+#                failure_count=current_account.isin(failure_values).groupby('eventName').size()[1]
+#            else:
+#                failure_count=0
+#            if failure_count >= locked_account:
+#                for failed in current_account['eventName'].isin(failure_values):
+#                    #print(failed)
+#                    if failed:
+#                        failed_count += 1
+#                    else:
+#                        failed_count = 0
+#                    if failed_count >= locked_account:
+#                        self.failed_account_anomalies.append(key)
+#                        break
+
         return self.failed_account_anomalies
     def location_login_anomaly(self,interval_sec=900):
         pass
@@ -109,7 +110,9 @@ class log_analysis(data_logs):
 def main():
 
     logFile=log_analysis()
-#    topLogins=logFile.top_logins()
+    topLogins=logFile.top_logins(15)
+    print(topLogins)
+    print(logFile.log_links(logFile.top_logins(15)))
     #loginAnomaly=logFile.failed_login_anomaly()
     #print(loginAnomaly)
 #    print(logFile.top_successful_logins(15))
@@ -120,7 +123,7 @@ def main():
 #    print(logFile.black_listed)
 #    print(len(logFile.black_listed))
 #    print(logFile.black_listed[0])
-    print(logFile.failed_login_anomaly())
+    print(len(logFile.failed_login_anomaly()))
 #    print(master_log.head())
 #    print(logFile.failed_account_anomalies)
 #    print(logFile.formatted_log[logFile.formatted_log.username == 'user-5941']['eventName'])
