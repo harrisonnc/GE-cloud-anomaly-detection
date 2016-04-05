@@ -59,9 +59,9 @@ def sample():
 def event_occurrence(event_id):
     logFile = log_analysis()
     test = logFile.horizontal_anomaly()
-    return logFile.search_event(int(event_id)).to_html()
+    return render_template('event_results.html',event_results=logFile.search_event(int(event_id)).to_html())
 
 if __name__ == '__main__':
     app.debug = True
     graphics.main(graphics)
-    app.run(host='0.0.0.0')
+    app.run()
