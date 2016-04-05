@@ -91,7 +91,13 @@
           <li><a href="/sample">Sample</a></li>
           <li><a href="/contact">Contact</a></li>
            <li><a href="/about">About</a></li>
-           <li style="float:right"><a href="/search">Search</a></li>
+
+           <form style="margin-top:12px; float:right;" action="/search" method="POST">
+                <input type="text" name="text">
+                <input type="submit" name="my-form" value="Search">
+            </form>
+
+
     </ul>
 
 
@@ -154,5 +160,9 @@
 
         </graphs>
     <img src="{{ url_for('static', filename='img/vcu header.png') }}" width="1887" height="100"></img>
+
+
+
+
     </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from log_analysis import log_analysis
 from log_graphs import graphics
 
@@ -54,6 +54,17 @@ def sample():
     return render_template('sample.html', sample=logFile.formatted_log[['startDateTime', 'username',
                                                                         'srcIp', 'destIp', 'deviceName', 'eventName']]
                            .head(100).to_html())
+
+
+@app.route('/<text>', methods=['POST'])
+def my_form_post(text):
+    text = request.form['text']
+    individual_log(text)
+    logFile = log_analysis()
+    return render_template('search_results.html', search_results=logFile.search_log(text).to_html())
+
+
+
 
 @app.route('/event/<event_id>')
 def event_occurrence(event_id):
