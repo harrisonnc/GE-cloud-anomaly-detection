@@ -92,6 +92,22 @@
             background: #b2b2b2;
             }
 
+            horizontal_anomaly{
+            float: left;
+            margin-right:30px;
+            border-style: outset;
+            margin-top: 25px;
+            margin-right: 30px;
+            margin-bottom: 25px;
+            margin-left: 25px;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
+            color: #000000;
+            background: #b2b2b2;
+            }
+
             graphs{
             display: inline;
             }
@@ -149,6 +165,11 @@
             <h4 >Top 15 Location Anomalies</h4>
             {{ location_login_anomaly | safe }}
             </location_login_anomaly>
+
+            <horizontal_anomaly>
+            <h4 >Top 15 Horizontal Anomalies</h4>
+            {{ horizontal_anomaly | safe }}
+            </horizontal_anomaly>
 
 
             </div>

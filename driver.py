@@ -22,11 +22,13 @@ def dashboard():
     topFailedLoginAnomaly = logFile.log_links(logFile.failed_login_anomaly().sort_values(['Total'],ascending=False)
                                               .set_index('username'))
     topLocationLoginAnomaly = logFile.log_links(logFile.location_login_anomaly().set_index('username'))
+    topHorizontalAnomaly = logFile.log_links(logFile.add_formatting(logFile.horizontal_anomaly(),prepend_value='event/'))
     return render_template('dashboard.html', logins=topLogins.to_html(escape=False, index=False),
                            successful=topSuccessfulLogins.to_html(escape=False, index=False),
                            failed=topFailedLogins.to_html(escape=False, index=False),
                            failed_login_anomaly=topFailedLoginAnomaly.head(15).to_html(escape=False, index=False),
-                           location_login_anomaly=topLocationLoginAnomaly.head(15).to_html(escape=False, index=False))
+                           location_login_anomaly=topLocationLoginAnomaly.head(15).to_html(escape=False, index=False),
+                           horizontal_anomaly=topHorizontalAnomaly.head(15).to_html(escape=False, index=False))
     # sample=logFile.formatted_log.head().to_html())
 
 
@@ -53,6 +55,11 @@ def sample():
                                                                         'srcIp', 'destIp', 'deviceName', 'eventName']]
                            .head(100).to_html())
 
+@app.route('/event/<event_id>')
+def event_occurrence(event_id):
+    logFile = log_analysis()
+    test = logFile.horizontal_anomaly()
+    return logFile.search_event(int(event_id)).to_html()
 
 if __name__ == '__main__':
     app.debug = True

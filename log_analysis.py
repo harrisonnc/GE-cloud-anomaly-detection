@@ -11,6 +11,7 @@ class log_analysis(data_logs):
         self.white_listed = []
         self.black_listed = []
         self.failed_account_anomalies = []
+        self.horizontal_anomaly_log = []
         self.event_indexed = self.formatted_log.set_index(['eventName'])
         self.failure_values = ['A Kerberos authentication ticket (TGT) was rejected', 'Web Service Login Failed']
         log_analysis.retrieve_location_anomaly_settings(self)
@@ -65,7 +66,16 @@ class log_analysis(data_logs):
                 print(new_key)
 
     def horizontal_anomaly(self):
-        pass
+        self.horizontal_anomaly_log=self.formatted_log[self.formatted_log.eventName == 'A Kerberos authentication ticket (TGT) was rejected']
+        self.horizontal_anomaly_log = self.horizontal_anomaly_log.sort_values('startTime')
+        self.horizontal_anomaly_log['intb'] = self.horizontal_anomaly_log['startTime'] - \
+                                              self.horizontal_anomaly_log['startTime'][1]
+        self.horizontal_anomaly_log['intb'] = self.horizontal_anomaly_log['intb'].map(lambda x: int(x/300000))
+        return self.horizontal_anomaly_log.set_index(['username']).groupby('intb').size()[self.horizontal_anomaly_log
+                                                                                              .set_index(['username'])
+                                                                                              .groupby('intb').size()
+                                                                                              .values > 3]\
+            .reset_index().sort_values([0], ascending=False)
 
     def top_logins(self, rows=10):
         return self.formatted_log.groupby('username').size().sort_values(ascending=False).head(rows).to_frame()
@@ -148,6 +158,9 @@ class log_analysis(data_logs):
                                                                                     .size().values > 3].reset_index()\
             .sort_values([0], ascending=False)
 
+    def search_event(self,event_id):
+        return self.horizontal_anomaly_log.set_index(['intb']).loc[[event_id]]
+
 
 def main():
     logFile = log_analysis()
@@ -164,7 +177,8 @@ def main():
     #    print(logFile.black_listed)
     #    print(len(logFile.black_listed))
     #    print(logFile.black_listed[0])
-    print(logFile.location_login_anomaly())
+    print(logFile.add_formatting(logFile.horizontal_anomaly(),prepend_value='test/'))
+    print(logFile.search_event(0))
 
 
 #    print(master_log.head())

@@ -98,6 +98,17 @@ class data_logs(object):
         linker_log.columns = ['UserName', 'Total']
         return linker_log
 
+    def add_formatting(self,log_to_format,prepend_value='',append_value=''):
+        formatter_log = log_to_format.reset_index()
+        formatter = formatter_log['intb']
+        final_formatter = []
+        for n, i in enumerate(formatter):
+            final_formatter.append(prepend_value + str(formatter[n]) + append_value)
+        sorted_formatter_list = sorted(formatter_log.groupby('intb').groups.items(), key=operator.itemgetter(1))
+        sorted_formatter_log = [i[0] for i in sorted_formatter_list]
+        formatter_log['intb'] = formatter_log['intb'].replace(to_replace=sorted_formatter_log, value=final_formatter)
+        formatter_log.columns = ['index','username','Total']
+        return formatter_log.set_index(['username']).Total
 
 def main():
     df = data_logs()
