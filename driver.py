@@ -51,9 +51,7 @@ def about():
 @app.route('/sample')
 def sample():
     logFile = log_analysis()
-    return render_template('sample.html', sample=logFile.formatted_log[['startDateTime', 'username',
-                                                                        'srcIp', 'destIp', 'deviceName', 'eventName']]
-                           .head(100).to_html())
+    return render_template('sample.html', sample=logFile.formatted_log[['startDateTime', 'username', 'srcIp', 'destIp', 'deviceName', 'eventName']].head(100).to_html())
 
 
 @app.route('/<text>', methods=['POST'])
