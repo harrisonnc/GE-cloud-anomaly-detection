@@ -87,8 +87,8 @@ class log_analysis(data_logs):
 
         failed_logins = self.formatted_log.set_index(['eventName']).loc[unique_failure_values].groupby(
             'username').groups.keys()
-        print(failed_logins)
-        print(len(failed_logins))
+        #print(failed_logins)
+        #print(len(failed_logins))
         for key in failed_logins:
             failed_count = 0
             # print(key)
